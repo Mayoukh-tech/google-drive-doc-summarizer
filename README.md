@@ -107,6 +107,7 @@ The application generates:
 -   Python
 -   Flask
 -   Google Drive API
+-   Gemini model
 -   ReportLab
 -   HTML/CSS
 -   CSV module
