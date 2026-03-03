@@ -1,119 +1,81 @@
-# Google Drive Document Summarizer
+# Drive Document Summarizer
 
-A Flask-based web application that retrieves files from a Google Drive
-folder, extracts their content, generates summaries, and displays them
-in a web interface. The summaries can also be downloaded as CSV or PDF
-reports.
+A Flask app that reads files from a Google Drive folder, extracts text, summarizes each file with Gemini, and generates downloadable CSV/PDF reports.
 
-------------------------------------------------------------------------
+## Prerequisites
 
-## Features
+- Python 3.10+
+- A Google AI Studio API key (Gemini)
+- Google Drive OAuth client credentials (`credentials.json`)
 
--   Fetch files directly from a Google Drive folder
--   Supports:
-    -   Google Docs
-    -   Images
--   Extracts text from documents
--   Generates summaries automatically
--   Displays results in a clean HTML table
--   Downloadable reports:
-    -   CSV
-    -   PDF (with clickable links)
--   Simple Flask web interface
+## Project Setup
 
-------------------------------------------------------------------------
+1. Clone the repository and move into it.
 
-## Project Structure
+```bash
+git clone <repo-url>
+cd Drve_Doc_Summarizer
+```
 
-Drive_Doc_Summarizer │ ├── app.py ├── google_drive.py ├── parser.py ├──
-summarizer.py ├── report_generator.py │ ├── templates │ └── index.html │
-├── downloads ├── requirements.txt └── README.md
+2. Create and activate a virtual environment.
 
-------------------------------------------------------------------------
+Windows (PowerShell):
 
-## Installation
-
-### 1. Clone the repository
-
-git clone https://github.com/yourusername/drive-doc-summarizer.git cd
-drive-doc-summarizer
-
-### 2. Create a virtual environment
-
+```powershell
 python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
 
-Activate it
+macOS/Linux:
 
-Windows: .venv`\Scripts`{=tex}`\activate`{=tex}
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-Mac/Linux: source .venv/bin/activate
+3. Install dependencies.
 
-------------------------------------------------------------------------
-
-### 3. Install dependencies
-
+```bash
 pip install -r requirements.txt
+```
 
-------------------------------------------------------------------------
+4. Add Gemini API key in `.env`.
 
-## Google Drive API Setup
+```env
+GOOGLE_API_KEY= api_key_here
+```
 
-1.  Go to Google Cloud Console
-2.  Create a new project
-3.  Enable the Google Drive API
-4.  Create OAuth credentials
-5.  Download credentials.json
-6.  Place it in the project root
+5. Add Google Drive OAuth credentials.
 
-Example:
+- Create a folder named `credentials` in the project root (if not present).
+- Download OAuth client file from Google Cloud Console.
+- Place it at: `credentials/credentials.json`
 
-Drive_Doc_Summarizer │ ├── credentials.json
+6. Set target Drive folder ID in `app.py`.
 
-------------------------------------------------------------------------
+```python
+FOLDER_ID = "google_drive_folder_id"
+```
 
-## Configure Google Drive Folder
+## Run the App
 
-Inside app.py set your folder ID:
-
-FOLDER_ID = "YOUR_GOOGLE_DRIVE_FOLDER_ID"
-
-Example Drive folder link:
-
-https://drive.google.com/drive/folders/FOLDER_ID
-
-------------------------------------------------------------------------
-
-## Run the Application
-
+```bash
 python app.py
+```
 
-Open in browser:
+Open: `http://127.0.0.1:5000`
 
-http://127.0.0.1:5000
+On first run, Google OAuth login opens in browser and creates `token.pickle`.
 
-------------------------------------------------------------------------
+## Output Files
 
-## Download Reports
+After processing, the app generates:
 
-The application generates:
+- `summary_report.csv`
+- `summary_report.pdf`
+- Downloaded originals in `downloads/`
 
--   summary_report.csv → CSV report of summaries
--   summary_report.pdf → PDF report with clickable links
+## Notes
 
-------------------------------------------------------------------------
-
-## Technologies Used
-
--   Python
--   Flask
--   Google Drive API
--   Gemini model
--   ReportLab
--   HTML/CSS
--   CSV module
-
-------------------------------------------------------------------------
-
-## Author
-
-Flask + Google Drive API project for automated document summarization.
+- Supported file types: `.pdf`, `.docx`, `.txt`
+- Make sure the authenticated Google account has access to the Drive folder.
