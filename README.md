@@ -113,16 +113,6 @@ The application generates:
 
 ------------------------------------------------------------------------
 
-## Security Note
-
-Do not upload these files to GitHub:
-
-credentials.json token.json .venv summary_report.csv summary_report.pdf
-
-These should be included in .gitignore.
-
-------------------------------------------------------------------------
-
 ## Author
 
 Flask + Google Drive API project for automated document summarization.
