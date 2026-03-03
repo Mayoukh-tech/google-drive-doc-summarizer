@@ -123,16 +123,6 @@ These should be included in .gitignore.
 
 ------------------------------------------------------------------------
 
-## Future Improvements
-
--   AI powered summarization
--   Support for PDFs
--   Better UI
--   Background processing
--   Search and filtering
-
-------------------------------------------------------------------------
-
 ## Author
 
 Flask + Google Drive API project for automated document summarization.
